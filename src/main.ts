@@ -51,11 +51,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(8001, '0.0.0.0');
+  await app.listen(8002, '0.0.0.0');
   // eslint-disable-next-line no-console
-  console.log('Nest Fastify API running at http://localhost:8001');
+  console.log('Nest Fastify API running at http://localhost:8002');
   // eslint-disable-next-line no-console
-  console.log('Swagger docs available at http://localhost:8001/api/docs');
+  console.log('Swagger docs available at http://localhost:8002/api/docs');
 }
 
 bootstrap();

@@ -7,10 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  DONOR
+  RECEIVER
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   password  String
+  firstName String?
+  lastName  String?
+  username  String?  @unique
+  role      UserRole
+  deletedAt DateTime?
   createdAt DateTime @default(now())
   posts     Post[]
   votes     Vote[]

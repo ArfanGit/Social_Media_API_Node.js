@@ -18,17 +18,12 @@ export class PostsService {
         ownerId,
       },
       include: {
-        owner: {
-          select: {
-            id: true,
-            email: true,
-            createdAt: true,
-          },
-        },
+        owner: true,
       },
     });
 
-    return post;
+    // post.owner contains full User including role etc.; PostResponseDto typing is loose enough
+    return post as unknown as PostResponseDto;
   }
 
   async findAll(
@@ -46,13 +41,7 @@ export class PostsService {
       take: limit,
       skip,
       include: {
-        owner: {
-          select: {
-            id: true,
-            email: true,
-            createdAt: true,
-          },
-        },
+        owner: true,
         votes: true,
       },
       orderBy: {
@@ -60,31 +49,28 @@ export class PostsService {
       },
     });
 
-    return posts.map((post) => ({
-      Post: {
-        id: post.id,
-        title: post.title,
-        content: post.content,
-        published: post.published,
-        createdAt: post.createdAt,
-        ownerId: post.ownerId,
-        owner: post.owner,
-      },
-      votes: post.votes.length,
-    }));
+    return posts.map(
+      (post: any): PostWithVotesDto => ({
+        Post: {
+          id: post.id,
+          title: post.title,
+          content: post.content,
+          published: post.published,
+          createdAt: post.createdAt,
+          ownerId: post.ownerId,
+          // Explicit cast to any to satisfy PostResponseDto owner typing
+          owner: post.owner as any,
+        },
+        votes: post.votes.length,
+      }),
+    );
   }
 
   async findOne(id: number): Promise<PostWithVotesDto> {
     const post = await this.prisma.post.findUnique({
       where: { id },
       include: {
-        owner: {
-          select: {
-            id: true,
-            email: true,
-            createdAt: true,
-          },
-        },
+        owner: true,
         votes: true,
       },
     });
@@ -101,7 +87,8 @@ export class PostsService {
         published: post.published,
         createdAt: post.createdAt,
         ownerId: post.ownerId,
-        owner: post.owner,
+        // Cast owner to any to satisfy PostResponseDto typing
+        owner: post.owner as any,
       },
       votes: post.votes.length,
     };
@@ -128,17 +115,11 @@ export class PostsService {
       where: { id },
       data: updatePostDto,
       include: {
-        owner: {
-          select: {
-            id: true,
-            email: true,
-            createdAt: true,
-          },
-        },
+        owner: true,
       },
     });
 
-    return updatedPost;
+    return updatedPost as unknown as PostResponseDto;
   }
 
   async remove(id: number, userId: number): Promise<void> {

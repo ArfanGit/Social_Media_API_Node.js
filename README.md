@@ -1,13 +1,16 @@
-# Social Media API - NestJS + Fastify + Prisma
+# Account & Auth API - NestJS + Fastify + Prisma
 
-A TypeScript/Node.js backend API for a social media application, built with **NestJS**, **Fastify**, and **Prisma**. This project is a TypeScript conversion of a FastAPI course project, featuring user management, posts, authentication, and voting/liking functionality.
+A TypeScript/Node.js backend API focused on **user accounts**, **authentication**, and **self-service account management** (profile update, password change, soft delete), built with **NestJS**, **Fastify**, and **Prisma**.  
+Additional modules for posts and voting are included as optional examples and can be enabled if needed.
 
 ## 🚀 Features
 
-- **User Management**: User registration and profile retrieval
+- **User Management**: User registration, profile retrieval, profile update
 - **Authentication**: JWT-based authentication system
-- **Posts**: Full CRUD operations for posts with pagination and search
-- **Voting System**: Like/unlike posts functionality
+- **Password Management**: Strong password rules, change password endpoint
+- **Account Deletion**: Soft delete with password confirmation
+- **Posts** (optional): CRUD operations for posts with pagination and search
+- **Voting System** (optional): Like/unlike posts functionality
 - **API Documentation**: Interactive Swagger/OpenAPI documentation
 - **Database**: PostgreSQL with Prisma ORM
 - **Docker Support**: Complete Docker setup for easy development
@@ -36,7 +39,7 @@ A TypeScript/Node.js backend API for a social media application, built with **Ne
 1. **Clone the repository**
    ```bash
    git clone <your-repo-url>
-   cd CRUD-Fastify
+   cd Account_&_Auth_API
    ```
 
 2. **Start the application**
@@ -51,8 +54,8 @@ A TypeScript/Node.js backend API for a social media application, built with **Ne
    - Start the API server with hot-reload
 
 3. **Access the API**
-   - API: http://localhost:8001
-   - Swagger Docs: http://localhost:8001/api/docs
+   - API: http://localhost:8002
+   - Swagger Docs: http://localhost:8002/api/docs
 
 ### Option 2: Local Development
 
@@ -83,7 +86,7 @@ A TypeScript/Node.js backend API for a social media application, built with **Ne
    npm run start:dev
    ```
 
-   The API will be available at http://localhost:8001
+   The API will be available at http://localhost:8002
 
 ## 📚 API Endpoints
 

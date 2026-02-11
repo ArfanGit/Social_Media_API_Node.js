@@ -30,7 +30,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid Credentials');
     }
 
-    const payload = { user_id: user.id };
+    const payload = { user_id: user.id, role: user.role };
     const accessToken = this.jwtService.sign(payload);
 
     return {
